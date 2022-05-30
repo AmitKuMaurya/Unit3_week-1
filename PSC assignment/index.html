@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+    </head>
+        <style>
+            *{
+                margin: 0px;
+                padding: 0pc;
+            }
+            #container{
+                display: flex;
+                justify-content: space-between;
+                height: 50px;
+                background-color: lightcoral;
+                align-items: center;
+            }
+            #container>div{
+                padding-right: 60px;
+            }
+            #container>div>a{
+                text-decoration: none;
+                color: black;
+            }
+            h2{
+                text-align: center;
+                color: lightcoral;
+                margin-bottom: 30px;
+            }
+            #signup-form-div > form{
+                display: flex;
+                flex-direction: column;
+                max-width: 20%;
+                margin: auto;
+                justify-content: space-between;
+    
+            }
+            #signup-form-div > form > input{
+                padding: 5px 0px 5px 0px;
+                margin-bottom: 10px;
+            }
+        </style>
+    <body>
+        <div id="container">
+            <div id="Batches--">Batches--</div>
+            <div id="web15">FT Web-15:0</div>
+            <div id="web16">FT Web-16:0</div>
+            <div id="web17">FT Web-17:0</div>
+            <div id="web18">FT Web-18:0</div>
+            <div id="web19">FT Web-19:0</div>
+            <div id="web20">FT Web-20:0</div>
+            <div><a href="sd.html">Student Dashboard</a></div>
+        </div>
+        <h2 style="text-align:center;">Signup Now!</h2>
+        <div id="signup-form-div">
+            <form id="form" onsubmit="Submitit(event)">
+                <!--Write form input elements here-->
+                <input type="text" id="name"  placeholder="Enter your Name"  required>
+                <input type="text" id="course"  placeholder="Enter your course"  required>
+                <input type="text" id="unit" placeholder="Enter your unit" required>
+                <input type="url" id="image" placeholder="Enter your url" required>
+                <select id="batch">
+                    <option value="">Select--batch</option>
+                    <option value="web15">Batch fw15</option>
+                    <option value="web16">Batch fw16</option>
+                    <option value="web17">Batch fw17</option>
+                    <option value="web18">Batch fw18</option>
+                    <option value="web19">Batch fw19</option>
+                    <option value="web20">Batch fw20</option>
+                </select>
+                <input type="submit">
+
+            </form>
+
+        </div>
+    </body>
+
+</html>
+
+<script>
+
+    let detailArray = JSON.parse(localStorage.getItem("Details")) || [];
+
+    function Submitit(){
+        event.preventDefault(event);
+        let object = {
+            Username : form.name.value,
+            Usercourse : form.course.value,
+            Userunit : form.unit.value,
+            Userimage : form.image.value,
+            Userbatch : form.batch.value,
+        }
+
+        detailArray.push(object);
+        localStorage.setItem("Details",JSON.stringify(detailArray));
+        // window.location.href = "login.html"
+    }
+
+    function Countit(){
+        let detailArray = JSON.parse(localStorage.getItem("Details")) || [];
+
+        let obj = {};
+        for(let i=0;i<detailArray.length;i++){
+            if(obj[detailArray[i].Userbatch]==undefined){
+                obj[detailArray[i].Userbatch]=1;
+                if(detailArray[i].Userbatch=="web15"){
+                    document.querySelector("#web15").innerText = "FT Web-15:"+ obj[detailArray[i].Userbatch];
+                }
+            }
+            else{
+                obj[detailArray[i].Userbatch]+=1;
+                if(detailArray[i].Userbatch=="web15"){
+                    document.querySelector("#web15").innerText = "FT Web-15:"+ obj[detailArray[i].Userbatch];
+                }
+            }
+        }
+        for(let i=0;i<detailArray.length;i++){
+            console.log(detailArray);
+        // for Web 16
+        if(obj[detailArray[i].Userbatch]==undefined){
+            obj[detailArray[i].Userbatch]=1;
+            if(detailArray[i].Userbatch=="web16"){
+                document.querySelector("#web16").innerText = "FT Web-16:"+ obj[detailArray[i].Userbatch];
+            }
+        }
+        else{
+            obj[detailArray[i].Userbatch]+=1;
+            if(detailArray[i].Userbatch=="web16"){
+                document.querySelector("#web16").innerText = "FT Web-16:"+ obj[detailArray[i].Userbatch];
+            }
+        } 
+        }
+        
+    }
+    Countit();
+</script>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1{
+            text-align: center;
+        }
+        #bank{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            grid-template-rows: repeat(auto,auto);
+        }
+        .product>img{
+            height: 30%;
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="counter">Products on display - </h1>
+    <div id="bank"></div>
+</body>
+</html>
+
+<script>
+
+    let Array = JSON.parse(localStorage.getItem("Products")) || [];
+    let c = document.querySelector("h1");
+    // c.innerText = Array.length;
+    c.innerText = "Products on display -"+  Array.length;
+    Array.forEach(function (ele,i){
+        let big = document.createElement("div");
+        big.setAttribute("class","product");
+        let img = document.createElement("img");
+        img.setAttribute("src",ele.image);
+        let h2 = document.createElement("h2");
+        h2.innerText = ele.name;
+        let h4 = document.createElement("h4");
+        h4.innerText = ele.price;
+        let sold = document.createElement("button");
+        sold.setAttribute("id","sold")
+        sold.innerText = "Sold";
+        sold.addEventListener("click", function(){
+            showit(ele,i);
+        });
+
+        let remove = document.createElement("button");
+        remove.setAttribute("id","remove");
+        remove.innerText = "Remove";
+        remove.style.color = "red";
+        remove.style.cursor = "pointer"
+
+        remove.addEventListener("click", function() {
+          Delit(ele,i);
+      });
+
+        big.append(img,h2,h4,sold,remove)
+        document.querySelector("#bank").append(big);
+    })
+
+    function Delit(ele,i){
+        Array.splice(i,1)
+        localStorage.setItem("Products",JSON.stringify(Array))
+        window.location.reload();
+    }
+    // function showit(){
+    //     if(ele.sold==false){
+    //         sold.style.color = "purple";
+    //     }
+    //     else{
+    //         sold.style.color = "yellow";
+    //     }
+    // }
+</script>

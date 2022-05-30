@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+                margin: 0px;
+                padding: 0pc;
+            }
+            #container{
+                display: flex;
+                justify-content: space-between;
+                height: 50px;
+                background-color: lightcoral;
+                align-items: center;
+            }
+            #container>div{
+                padding-right: 60px;
+            }
+            #container>div>a{
+                text-decoration: none;
+                color: black;
+            }
+        #contain{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            grid-template-rows: repeat(auto,auto);
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="Batches--">Batches--</div>
+        <div id="web15">FT Web-15:0</div>
+        <div id="web16">FT Web-16:0</div>
+        <div id="web17">FT Web-17:0</div>
+        <div id="web18">FT Web-18:0</div>
+        <div id="web19">FT Web-19:0</div>
+        <div id="web20">FT Web-20:0</div>
+        <div><a href="index.html">Student Form</a></div>
+    </div>
+    <div id="contain">
+
+    </div>
+</body>
+</html>
+
+<script>
+    let detailArray = JSON.parse(localStorage.getItem("Details")) || [];
+    
+    function Showthat(){
+        detailArray.forEach(function(ele,i){
+            console.log(ele,i);
+            let small = document.createElement("div");
+
+            let img = document.createElement("img");
+            img.src = ele.Userimage;
+
+            let name = document.createElement("h4");
+            name.innerText = ele.Username;
+
+            let course = document.createElement("p");
+            course.innerText = ele.Usercourse;
+
+            let unit = document.createElement("p");
+            unit.innerText = ele.Userunit;
+
+            let batch = document.createElement("p");
+            batch.innerText = ele.Userbatch;
+
+            let remove = document.createElement("button");
+            remove.innerText = "Delete Card"
+            remove.addEventListener("click", function(){
+                Delit(ele,i);
+            });
+            
+            small.append(img,name,course,unit,batch,remove);
+
+            document.querySelector("#contain").append(small);
+        })
+    }
+    function Delit(ele,i){
+        detailArray.splice(i,1);
+        localStorage.setItem("Details",JSON.stringify(detailArray));
+        window.location.reload();
+    }
+    Showthat();
+
+    function Countit(){
+        let detailArray = JSON.parse(localStorage.getItem("Details")) || [];
+        console.log(detailArray);
+        let obj = {};
+        for(let i=0;i<detailArray.length;i++){
+            // for Web 15
+            if(obj[detailArray[i].Userbatch]==undefined){
+                obj[detailArray[i].Userbatch]=1;
+                if(detailArray[i].Userbatch=="web15"){
+                    document.querySelector("#web15").innerText = "FT Web-15:"+ obj[detailArray[i].Userbatch];
+                }
+            }
+            else{
+                obj[detailArray[i].Userbatch]+=1;
+                if(detailArray[i].Userbatch=="web15"){
+                    document.querySelector("#web15").innerText = "FT Web-15:"+ obj[detailArray[i].Userbatch];
+                }
+            }
+        }
+    }
+    Countit();
+
+
+    
+
+</script>

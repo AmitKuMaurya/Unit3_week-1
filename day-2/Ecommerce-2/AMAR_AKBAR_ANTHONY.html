@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<!-- <script src="./AMAR_AKBAR_ANTHONY.js"></script> -->
+
+<script>
+    // var Parent = function(name)
+// {
+//     this.name = name;
+//     this.my_parent = "parent_property";
+//     this.go = function()
+//     {
+//         alert("GO")
+//     }   
+
+// }
+
+// var Child = function(name)
+// {  
+//     this.name = name;
+//     this.my_child = "child_property";
+
+//     Parent.call(this);
+
+//     alert(this.hasOwnProperty("go")) // HERE TRUE!!!
+// }
+
+// var ChildChild = function(name)
+// {
+//     this.name = name;
+//     this.su = function(){}
+// }
+
+// // PSEUDO CLASSICAL ECMA STANDARD
+// Child.prototype = new Parent("PARENT"); 
+// ChildChild.prototype = new Child("CHILD"); 
+// var c = new ChildChild("CHILDCHILD");
+
+
+// let AMAR  = {
+//     profession : "Singer",
+//     place : "Goa"
+// };
+// let AKBAR  = {
+//     profession : "Chef",
+//     place : "Mumbai"
+// };
+// let ANTHONY = {
+//     profession : "Magician",
+//     place : "Kashmir"
+// };
+
+function object(name,profession,area){
+    this.name = name;
+    this.profession = profession;
+    this.area = area;
+}
+let Amar = new object("Amar","Singer","Goa")
+let Akbar = new object("Akbar","Chef","Mumbai")
+let Anthony = new object("Anthony","Magician","Kashmir")
+
+function Profes(Prof){
+    console.log(`${this.name}'s profession has changed From ${this.profession} to ${Prof} `);
+}
+
+Profes.call(Amar,Akbar.profession);
+Profes.call(Akbar,Anthony.profession);
+Profes.call(Anthony,Amar.profession);
+
+</script>
